@@ -16,6 +16,13 @@ function MoveH (direction: number) {
                 overlap = true
             }
         }
+        for (let value of H_list) {
+            if (H_sprite.overlapsWith(value)) {
+                if (value != H_sprite) {
+                    overlap = true
+                }
+            }
+        }
         if (!(overlap)) {
             H_sprite.x += direction
             if (16 == H_sprite.left) {
@@ -25,9 +32,16 @@ function MoveH (direction: number) {
                 H_sprite.x += 0 - direction
             }
         }
-        for (let V_sprite of V_list) {
-            if (H_sprite.overlapsWith(V_sprite)) {
+        for (let V_sprite2 of V_list) {
+            if (H_sprite.overlapsWith(V_sprite2)) {
                 overlap = true
+            }
+        }
+        for (let value2 of H_list) {
+            if (H_sprite.overlapsWith(value2)) {
+                if (value2 != H_sprite) {
+                    overlap = true
+                }
             }
         }
         if (overlap) {
@@ -39,31 +53,45 @@ controller.left.onEvent(ControllerButtonEvent.Released, function () {
     MoveH(-16)
 })
 function moveV (direction: number) {
-    for (let V_sprite of V_list) {
+    for (let V_sprite3 of V_list) {
         overlap = false
-        for (let H_sprite of H_list) {
-            if (V_sprite.overlapsWith(H_sprite)) {
+        for (let H_sprite2 of H_list) {
+            if (V_sprite3.overlapsWith(H_sprite2)) {
                 overlap = true
+            }
+        }
+        for (let value3 of V_list) {
+            if (V_sprite3.overlapsWith(value3)) {
+                if (value3 != V_sprite3) {
+                    overlap = true
+                }
             }
         }
         if (!(overlap)) {
-            V_sprite.y += direction
-            if (0 == V_sprite.top) {
-                if (V_sprite.x != 72) {
-                    V_sprite.y += 0 - direction
+            V_sprite3.y += direction
+            if (0 == V_sprite3.top) {
+                if (V_sprite3.x != 72) {
+                    V_sprite3.y += 0 - direction
                 }
             }
-            if (128 == V_sprite.bottom) {
-                V_sprite.y += 0 - direction
+            if (128 == V_sprite3.bottom) {
+                V_sprite3.y += 0 - direction
             }
         }
-        for (let H_sprite of H_list) {
-            if (V_sprite.overlapsWith(H_sprite)) {
+        for (let H_sprite3 of H_list) {
+            if (V_sprite3.overlapsWith(H_sprite3)) {
                 overlap = true
             }
         }
+        for (let value4 of V_list) {
+            if (V_sprite3.overlapsWith(value4)) {
+                if (value4 != V_sprite3) {
+                    overlap = true
+                }
+            }
+        }
         if (overlap) {
-            V_sprite.y += 0 - direction
+            V_sprite3.y += 0 - direction
         }
     }
 }
@@ -73,436 +101,129 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 let overlap = false
 let H_list: Sprite[] = []
 let V_list: Sprite[] = []
+color.setColor(11, color.rgb(101, 101, 101))
+color.setColor(9, color.rgb(0, 30, 225))
+color.setColor(8, color.rgb(0, 30, 150))
+color.setColor(10, color.rgb(78, 197, 0))
+color.setColor(12, color.rgb(50, 50, 50))
 scene.setBackgroundColor(11)
-tiles.setTilemap(tiles.createTilemap(hex`0a0008000202020201020202020202020101010101010202020201010101010102020202010101010101020202020101010101010202020201010101010102020202010101010101020202020202020202020202`, img`
-    2 2 2 2 . 2 2 2 2 2 
-    2 2 . . . . . . 2 2 
-    2 2 . . . . . . 2 2 
-    2 2 . . . . . . 2 2 
-    2 2 . . . . . . 2 2 
-    2 2 . . . . . . 2 2 
-    2 2 . . . . . . 2 2 
-    2 2 2 2 2 2 2 2 2 2 
-    `, [myTiles.transparency16,myTiles.tile1,myTiles.tile2], TileScale.Sixteen))
+tiles.setTilemap(tilemap`level_0`)
 let Driver = sprites.create(img`
-    ...2552222552...
+    ........b.......
+    ....ff2222ff....
+    ..2ff222222ff2..
+    .22222222222222.
+    2222222222222222
+    2222222222222222
+    2222222222222222
+    2222222222222222
+    22222ffffff22222
+    222ffffffffff222
+    f2ffffffffffff2f
+    222ffffffffff222
+    2f2ffffffffff2f2
+    2f22ffffffff22f2
+    2ff2ffffffff2ff2
+    2ff22f2222f22ff2
+    2ff2222222222ff2
+    2ff2222222222ff2
+    2ff2222222222ff2
+    2fff22222222fff2
+    2fff22222222fff2
+    2fff22222222fff2
+    2fff22222222fff2
+    2fff22222222fff2
+    2ff22f2222f22ff2
+    2ff2ffffffff2ff2
+    2f22ffffffff22f2
+    2f2ffffffffff2f2
+    2f2ffffffffff2f2
+    222ffffffffff222
+    .22fff2222fff22.
     ..222222222222..
-    ff222222222222ff
-    ff222222222222ff
-    ff222222222222ff
-    ff222222222222ff
-    ff222222222222ff
-    ..222244442222..
-    ..222444444222..
-    ..224444444422..
-    ..224444444422..
-    ..224444444422..
-    ..224444444422..
-    ..224444444422..
-    ..224444444422..
-    ..224444444422..
-    ..224444444422..
-    ..224444444422..
-    ..224444444422..
-    ..224444444422..
-    ..224444444422..
-    ..224444444422..
-    ..224444444422..
-    ff224444444422ff
-    ff224444444422ff
-    ff224444444422ff
-    ff224444444422ff
-    ff224444444422ff
-    ff224444444422ff
-    ..222444444222..
-    ...2222222222...
-    ..........dd....
     `, SpriteKind.Virtical)
 Driver.setPosition(72, 64)
 let Limo_V3 = sprites.create(img`
-    1114541111454111
-    .11454111145411.
-    ..114111111411..
-    ff111111111111ff
-    ff111111111111ff
-    ff111ffffff111ff
-    ff11ffffffff11ff
-    ff11ffffffff11ff
-    ff11ffffffff11ff
-    ..11ffffffff11..
-    .111ffffffff111.
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    1111ffffffff1111
-    .111ffffffff111.
-    ..11ffffffff11..
-    ff11ffffffff11ff
-    ff11ffffffff11ff
-    ff11ffffffff11ff
-    ff11ffffffff11ff
-    ff11ffffffff11ff
-    ff11ffffffff11ff
-    ..111ffffff111..
-    .11111111111111.
-    1111111111111111
+    ........b.......
+    ....ffccccff....
+    ..cffccccccffc..
+    .cccccccccccccc.
+    cccccccccccccccc
+    cccccccccccccccc
+    cccccccccccccccc
+    cccccccccccccccc
+    cccccccccccccccc
+    cccccccccccccccc
+    cccccccccccccccc
+    cccccccccccccccc
+    cccccffffffccccc
+    cccffffffffffccc
+    fcffffffffffffcf
+    cccffffffffffccc
+    cfcffffffffffcfc
+    cfccffffffffccfc
+    cffcffffffffcffc
+    cffccfccccfccffc
+    cffccccccccccffc
+    cffccccccccccffc
+    cffccccccccccffc
+    cffccccccccccffc
+    cffccccccccccffc
+    cffccccccccccffc
+    cffccccccccccffc
+    cffccccccccccffc
+    cffccccccccccffc
+    cffccccccccccffc
+    cfffccccccccfffc
+    cfffccccccccfffc
+    ccffccccccccffcc
+    cfccccccccccccfc
+    cfffccccccccfffc
+    cfffccccccccfffc
+    cfffccccccccfffc
+    cfffccccccccfffc
+    cfffccccccccfffc
+    cfffccccccccfffc
+    cffccfccccfccffc
+    cffcffffffffcffc
+    cfccffffffffccfc
+    cfcffffffffffcfc
+    cfcffffffffffcfc
+    cccffffffffffccc
+    .ccfffccccfffcc.
+    ..cccccccccccc..
     `, SpriteKind.Virtical)
 Limo_V3.setPosition(88, 40)
 let Limo_H3 = sprites.create(img`
-    1..ffffff..11111111111111111111111111..ffffff..1
-    11.ffffff.1111111111111111111111111111.ffffff.11
-    111111111111111111111111111111111111111111111111
-    111111111111111111111111111111111111111111111144
-    111fffffffffffffffffffffffffffffffffffffff111455
-    11fffffffffffffffffffffffffffffffffffffffff11144
-    11fffffffffffffffffffffffffffffffffffffffff11111
-    11fffffffffffffffffffffffffffffffffffffffff11111
-    11fffffffffffffffffffffffffffffffffffffffff11111
-    11fffffffffffffffffffffffffffffffffffffffff11111
-    11fffffffffffffffffffffffffffffffffffffffff11144
-    111fffffffffffffffffffffffffffffffffffffff111455
-    111111111111111111111111111111111111111111111144
-    111111111111111111111111111111111111111111111111
-    11.ffffff.1111111111111111111111111111.ffffff.11
-    1..ffffff..11111111111111111111111111..ffffff..1
+    ..ccccccccccccccccccccccccccccccccfccccccccc....
+    .ccffffffffffffcfffffffffffffffffcccccccccccc...
+    ccccccffffffffcffffffffffffffffcccfccccccccccc..
+    cffffcccffffffcfffccccccccccccccffffcccccccccf..
+    cffffffcccccccccccccccccccccccffffffcccccccccff.
+    cfffffffcccccccccccccccccccccffffffffcccccccccf.
+    ccfffffcccccccccccccccccccccccfffffffcccccccccc.
+    ccfffffcccccccccccccccccccccccfffffffcccccccccc.
+    ccfffffcccccccccccccccccccccccfffffffccccccccccb
+    ccfffffcccccccccccccccccccccccfffffffcccccccccc.
+    cfffffffcccccccccccccccccccccffffffffcccccccccf.
+    cffffffcccccccccccccccccccccccffffffcccccccccff.
+    cffffcccffffffcfffccccccccccccccffffcccccccccf..
+    ccccccffffffffcffffffffffffffffcccfccccccccccc..
+    .ccffffffffffffcfffffffffffffffffcccccccccccc...
+    ..ccccccccccccccccccccccccccccccccfccccccccc....
     `, SpriteKind.Horizontal)
 Limo_H3.setPosition(56, 40)
 V_list = sprites.allOfKind(SpriteKind.Virtical)
 H_list = sprites.allOfKind(SpriteKind.Horizontal)
-for (let V_sprite of V_list) {
-    V_sprite.setFlag(SpriteFlag.StayInScreen, true)
+for (let V_sprite4 of V_list) {
+    V_sprite4.setFlag(SpriteFlag.StayInScreen, true)
 }
-for (let H_sprite of H_list) {
-    H_sprite.setFlag(SpriteFlag.StayInScreen, true)
+for (let H_sprite4 of H_list) {
+    H_sprite4.setFlag(SpriteFlag.StayInScreen, true)
 }
 game.onUpdate(function () {
-    if (Driver.y == 0) {
-        animation.runImageAnimation(
-        Driver,
-        [img`
-            ...2552222552...
-            ..222222222222..
-            ff222222222222ff
-            ff222222222222ff
-            ff222222222222ff
-            ff222222222222ff
-            ff222222222222ff
-            ..222244442222..
-            ..222444444222..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ..222444444222..
-            ...2222222222...
-            ..........dd....
-            `,img`
-            ff222222222222ff
-            ff222222222222ff
-            ff222222222222ff
-            ff222222222222ff
-            ff222222222222ff
-            ..222244442222..
-            ..222444444222..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ..222444444222..
-            ...2222222222...
-            ..........dd....
-            ................
-            ................
-            `,img`
-            ff222222222222ff
-            ff222222222222ff
-            ff222222222222ff
-            ..222244442222..
-            ..222444444222..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ..222444444222..
-            ...2222222222...
-            ..........dd....
-            ................
-            ................
-            ................
-            ................
-            `,img`
-            ff222222222222ff
-            ..222244442222..
-            ..222444444222..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ..222444444222..
-            ...2222222222...
-            ..........dd....
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            `,img`
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ..222444444222..
-            ...2222222222...
-            ..........dd....
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            `,img`
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ..224444444422..
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ..222444444222..
-            ...2222222222...
-            ..........dd....
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            `,img`
-            ..224444444422..
-            ..224444444422..
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ff224444444422ff
-            ..222444444222..
-            ...2222222222...
-            ..........dd....
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            `,img`
-            ..222444444222..
-            ...2222222222...
-            ..........dd....
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            `,img`
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            ................
-            `],
-        100,
-        false
-        )
-        timer.after(1000, function () {
+    if (Driver.y == 16) {
+        timer.after(400, function () {
             game.over(true)
         })
     }
