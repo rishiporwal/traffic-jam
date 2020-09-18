@@ -114,6 +114,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 function Put_in_level (Vehicle: Sprite, x: number, y: number) {
     Vehicle.setFlag(SpriteFlag.Ghost, false)
     Vehicle.setFlag(SpriteFlag.Invisible, false)
+    Vehicle.setPosition(x, y)
 }
 function Create_Charecters () {
     Driver = sprites.create(img`
@@ -151,7 +152,7 @@ function Create_Charecters () {
         ..222222222222..
         `, SpriteKind.Virtical)
     Driver.setPosition(72, 64)
-    Limo_V3 = sprites.create(img`
+    LimoV3 = sprites.create(img`
         ........b.......
         ....ffccccff....
         ..cffccccccffc..
@@ -201,8 +202,8 @@ function Create_Charecters () {
         .ccfffccccfffcc.
         ..cccccccccccc..
         `, SpriteKind.Virtical)
-    Limo_V3.setPosition(88, 40)
-    TruckH3 = sprites.create(img`
+    LimoV3.setPosition(88, 40)
+    SchoolBusH3 = sprites.create(img`
         ..55ffffffffffffffffffffffffffffffff5ff555555...
         .55f55fffffffffffffffffffffffffffff5ffff555555..
         55ff5555555555555555555555555555555ffffff555555.
@@ -220,7 +221,7 @@ function Create_Charecters () {
         .55f55fffffffffffffffffffffffffffff5ffff555555..
         ..55ffffffffffffffffffffffffffffffff5ff555555...
         `, SpriteKind.Horizontal)
-    TruckH3.setPosition(56, 40)
+    SchoolBusH3.setPosition(56, 40)
     JeepV2 = sprites.create(img`
         ........b.......
         ....eeeeeeee....
@@ -463,8 +464,8 @@ let PartyBusH3: Sprite = null
 let TruckV3: Sprite = null
 let JeepH2: Sprite = null
 let JeepV2: Sprite = null
-let Limo_V3: Sprite = null
-let TruckH3: Sprite = null
+let LimoV3: Sprite = null
+let SchoolBusH3: Sprite = null
 let Driver: Sprite = null
 let H_list: Sprite[] = []
 let V_list: Sprite[] = []
@@ -482,8 +483,8 @@ for (let H_sprite4 of H_list) {
     H_sprite4.setFlag(SpriteFlag.StayInScreen, true)
 }
 Put_in_level(Driver, 72, 64)
-Put_in_level(TruckH3, 56, 40)
-Put_in_level(Limo_V3, 88, 40)
+Put_in_level(SchoolBusH3, 56, 40)
+Put_in_level(LimoV3, 88, 40)
 Make_Invisible(JeepV2)
 Make_Invisible(JeepH2)
 Make_Invisible(TruckV3)
@@ -492,23 +493,41 @@ Make_Invisible(TaxiH2)
 Make_Invisible(TaxiV2)
 Make_Invisible(CarH2)
 Make_Invisible(CarV2)
+game.splash("Level " + convertToText(Level))
 game.onUpdate(function () {
     if (Driver.y == 16) {
-        Level += 1
-        if (Level == 1) {
-            Put_in_level(Driver, 72, 64)
-            Put_in_level(TruckH3, 56, 40)
-            Put_in_level(Limo_V3, 88, 40)
-            Make_Invisible(JeepV2)
-            Make_Invisible(JeepH2)
-            Make_Invisible(TruckV3)
-            Make_Invisible(PartyBusH3)
-            Make_Invisible(TaxiH2)
-            Make_Invisible(TaxiV2)
-            Make_Invisible(CarH2)
-            Make_Invisible(CarV2)
-        } else if (Level == 2) {
-        	
+        if (Level < 3) {
+            Level += 1
+            if (Level == 1) {
+                Put_in_level(Driver, 72, 64)
+                Put_in_level(SchoolBusH3, 56, 40)
+                Put_in_level(LimoV3, 88, 40)
+                Make_Invisible(JeepV2)
+                Make_Invisible(JeepH2)
+                Make_Invisible(TruckV3)
+                Make_Invisible(PartyBusH3)
+                Make_Invisible(TaxiH2)
+                Make_Invisible(TaxiV2)
+                Make_Invisible(CarH2)
+                Make_Invisible(CarV2)
+            } else if (Level == 2) {
+                Put_in_level(Driver, 72, 98)
+                Put_in_level(LimoV3, 40, 40)
+                Put_in_level(TruckV3, 88, 40)
+                Put_in_level(CarV2, 88, 80)
+                Put_in_level(JeepH2, 64, 56)
+                Put_in_level(TaxiH2, 48, 104)
+                Put_in_level(JeepV2, 104, 96)
+                Put_in_level(CarH2, 112, 72)
+                Make_Invisible(PartyBusH3)
+                Make_Invisible(TaxiV2)
+                Make_Invisible(SchoolBusH3)
+            }
+            if (Level < 3) {
+                game.splash("Level " + convertToText(Level))
+            }
+        } else {
+            game.over(true)
         }
     }
 })
