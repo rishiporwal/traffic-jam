@@ -496,38 +496,50 @@ Make_Invisible(CarV2)
 game.splash("Level " + convertToText(Level))
 game.onUpdate(function () {
     if (Driver.y == 16) {
-        if (Level < 3) {
+        if (Level < 4) {
             Level += 1
-            if (Level == 1) {
-                Put_in_level(Driver, 72, 64)
-                Put_in_level(SchoolBusH3, 56, 40)
-                Put_in_level(LimoV3, 88, 40)
-                Make_Invisible(JeepV2)
-                Make_Invisible(JeepH2)
-                Make_Invisible(TruckV3)
-                Make_Invisible(PartyBusH3)
-                Make_Invisible(TaxiH2)
-                Make_Invisible(TaxiV2)
-                Make_Invisible(CarH2)
-                Make_Invisible(CarV2)
-            } else if (Level == 2) {
-                Put_in_level(Driver, 72, 98)
-                Put_in_level(LimoV3, 40, 40)
-                Put_in_level(TruckV3, 88, 40)
-                Put_in_level(CarV2, 88, 80)
-                Put_in_level(JeepH2, 64, 56)
-                Put_in_level(TaxiH2, 48, 104)
-                Put_in_level(JeepV2, 104, 96)
-                Put_in_level(CarH2, 112, 72)
-                Make_Invisible(PartyBusH3)
-                Make_Invisible(TaxiV2)
-                Make_Invisible(SchoolBusH3)
-            }
-            if (Level < 3) {
-                game.splash("Level " + convertToText(Level))
-            }
         } else {
             game.over(true)
+        }
+        if (Level == 1) {
+            Put_in_level(Driver, 72, 64)
+            Put_in_level(SchoolBusH3, 56, 40)
+            Put_in_level(LimoV3, 88, 40)
+            Make_Invisible(JeepV2)
+            Make_Invisible(JeepH2)
+            Make_Invisible(TruckV3)
+            Make_Invisible(PartyBusH3)
+            Make_Invisible(TaxiH2)
+            Make_Invisible(TaxiV2)
+            Make_Invisible(CarH2)
+            Make_Invisible(CarV2)
+        } else if (Level == 2) {
+            Put_in_level(Driver, 72, 98)
+            Put_in_level(LimoV3, 40, 40)
+            Put_in_level(TruckV3, 88, 40)
+            Put_in_level(CarV2, 88, 80)
+            Put_in_level(JeepH2, 64, 56)
+            Put_in_level(TaxiH2, 48, 104)
+            Put_in_level(JeepV2, 104, 96)
+            Put_in_level(CarH2, 112, 72)
+            Make_Invisible(PartyBusH3)
+            Make_Invisible(TaxiV2)
+            Make_Invisible(SchoolBusH3)
+        } else if (Level == 3) {
+            Put_in_level(Driver, 72, 80)
+            Put_in_level(SchoolBusH3, 56, 104)
+            Put_in_level(PartyBusH3, 56, 56)
+            Put_in_level(CarH2, 96, 72)
+            Put_in_level(TaxiH2, 112, 24)
+            Put_in_level(TruckV3, 88, 40)
+            Put_in_level(LimoV3, 120, 56)
+            Make_Invisible(JeepV2)
+            Make_Invisible(JeepH2)
+            Make_Invisible(TaxiV2)
+            Make_Invisible(CarV2)
+        }
+        if (Level < 4) {
+            game.splash("Level " + convertToText(Level))
         }
     }
 })
