@@ -175,6 +175,23 @@ function moveV (direction: number) {
         }
     }
 }
+function Level7 () {
+    Put_in_level(Driver, 72, 64)
+    Put_in_level(TaxiH2, 48, 56)
+    Put_in_level(Car_2H2, 64, 40)
+    Put_in_level(Minivan_2H2, 64, 24)
+    Put_in_level(TruckV3, 104, 40)
+    Put_in_level(JeepV2, 56, 96)
+    Put_in_level(CarV2, 40, 32)
+    Put_in_level(CarH2, 48, 72)
+    Put_in_level(TaxiV2, 40, 96)
+    Put_in_level(PartyBusH3, 88, 88)
+    Make_Invisible(SchoolBusH3)
+    Make_Invisible(LimoV3)
+    Make_Invisible(JeepH2)
+    Make_Invisible(TrailerCarH3)
+    Make_Invisible(MinivanH2)
+}
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     MoveH(16)
 })
@@ -653,7 +670,7 @@ Level1()
 game.splash("Level " + convertToText(Level))
 game.onUpdate(function () {
     if (Driver.y == 16) {
-        if (Level < 7) {
+        if (Level < 8) {
             Level += 1
         } else {
             game.over(true)
@@ -670,8 +687,10 @@ game.onUpdate(function () {
             Level5()
         } else if (Level == 6) {
             Level6()
+        } else if (Level == 7) {
+            Level7()
         }
-        if (Level < 7) {
+        if (Level < 8) {
             game.splash("Level " + convertToText(Level))
         }
     }
