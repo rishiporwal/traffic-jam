@@ -2,6 +2,23 @@ namespace SpriteKind {
     export const Virtical = SpriteKind.create()
     export const Horizontal = SpriteKind.create()
 }
+function Level8 () {
+    Put_in_level(Driver, 72, 96)
+    Put_in_level(CarV2, 40, 32)
+    Put_in_level(TaxiV2, 56, 32)
+    Put_in_level(JeepV2, 40, 64)
+    Put_in_level(CarH2, 48, 88)
+    Put_in_level(TaxiH2, 64, 56)
+    Put_in_level(Car_2H2, 112, 24)
+    Put_in_level(Minivan_2H2, 80, 24)
+    Put_in_level(MinivanH2, 112, 72)
+    Put_in_level(PartyBusH3, 104, 104)
+    Put_in_level(SchoolBusH3, 88, 40)
+    Put_in_level(TruckV3, 88, 72)
+    Make_Invisible(JeepH2)
+    Make_Invisible(LimoV3)
+    Make_Invisible(TrailerCarH3)
+}
 function Colors2 () {
     color.setColor(11, color.rgb(101, 101, 101))
     color.setColor(9, color.rgb(0, 30, 225))
@@ -636,20 +653,20 @@ function Level6 () {
     Make_Invisible(TrailerCarH3)
 }
 let overlap = false
+let TrailerCarH3: Sprite = null
+let LimoV3: Sprite = null
+let JeepH2: Sprite = null
+let TruckV3: Sprite = null
+let SchoolBusH3: Sprite = null
+let PartyBusH3: Sprite = null
+let MinivanH2: Sprite = null
 let Minivan_2H2: Sprite = null
 let Car_2H2: Sprite = null
-let MinivanH2: Sprite = null
-let TrailerCarH3: Sprite = null
-let SchoolBusH3: Sprite = null
-let TaxiV2: Sprite = null
-let PartyBusH3: Sprite = null
+let TaxiH2: Sprite = null
 let CarH2: Sprite = null
 let JeepV2: Sprite = null
-let TaxiH2: Sprite = null
-let JeepH2: Sprite = null
+let TaxiV2: Sprite = null
 let CarV2: Sprite = null
-let TruckV3: Sprite = null
-let LimoV3: Sprite = null
 let Driver: Sprite = null
 let H_list: Sprite[] = []
 let V_list: Sprite[] = []
@@ -670,7 +687,7 @@ Level1()
 game.splash("Level " + convertToText(Level))
 game.onUpdate(function () {
     if (Driver.y == 16) {
-        if (Level < 8) {
+        if (Level < 9) {
             Level += 1
         } else {
             game.over(true)
@@ -689,8 +706,10 @@ game.onUpdate(function () {
             Level6()
         } else if (Level == 7) {
             Level7()
+        } else if (Level == 8) {
+            Level8()
         }
-        if (Level < 8) {
+        if (Level < 9) {
             game.splash("Level " + convertToText(Level))
         }
     }
