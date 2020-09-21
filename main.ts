@@ -27,6 +27,7 @@ function Colors2 () {
     color.setColor(12, color.rgb(50, 50, 50))
     color.setColor(5, color.rgb(220, 220, 7))
     color.setColor(4, color.rgb(79, 70, 37))
+    color.setColor(3, color.rgb(4, 30, 75))
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     moveV(-16)
@@ -72,6 +73,57 @@ function Level3 () {
 controller.down.onEvent(ControllerButtonEvent.Released, function () {
     moveV(16)
 })
+function Go_to_level (extra: boolean) {
+    if (Level == 1) {
+        Level1()
+    } else if (Level == 2) {
+        Level2()
+    } else if (Level == 3) {
+        Level3()
+    } else if (Level == 4) {
+        Level4()
+    } else if (Level == 5) {
+        Level5()
+    } else if (Level == 6) {
+        Level6()
+    } else if (Level == 7) {
+        Level7()
+    } else if (Level == 8) {
+        Level8()
+    } else {
+        if (extra) {
+            for (let value of V_list) {
+                value.setFlag(SpriteFlag.Invisible, true)
+            }
+            for (let value of H_list) {
+                value.setFlag(SpriteFlag.Invisible, true)
+            }
+            game.setDialogFrame(img`
+                f f f f f f f f f f f f f f f f 
+                f c c c c c c c c c c c c c c f 
+                f c b b b b b b b b b b b b c f 
+                f c b 1 1 1 1 1 1 1 1 1 1 b c f 
+                f c b 1 1 1 1 1 1 1 1 1 1 b c f 
+                f c b 1 1 1 1 1 1 1 1 1 1 b c f 
+                f c b 1 1 1 1 1 1 1 1 1 1 b c f 
+                f c b 1 1 1 1 1 1 1 1 1 1 b c f 
+                f c b 1 1 1 1 1 1 1 1 1 1 b c f 
+                f c b 1 1 1 1 1 1 1 1 1 1 b c f 
+                f c b 1 1 1 1 1 1 1 1 1 1 b c f 
+                f c b 1 1 1 1 1 1 1 1 1 1 b c f 
+                f c b 1 1 1 1 1 1 1 1 1 1 b c f 
+                f c b b b b b b b b b b b b c f 
+                f c c c c c c c c c c c c c c f 
+                f f f f f f f f f f f f f f f f 
+                `)
+            game.showLongText("Invalid Level :(", DialogLayout.Full)
+            game.reset()
+        }
+    }
+    if (Level < 9) {
+        game.splash("Level " + convertToText(Level))
+    }
+}
 function MoveH (direction: number) {
     for (let H_sprite of H_list) {
         overlap = false
@@ -668,9 +720,9 @@ let JeepV2: Sprite = null
 let TaxiV2: Sprite = null
 let CarV2: Sprite = null
 let Driver: Sprite = null
+let Level = 0
 let H_list: Sprite[] = []
 let V_list: Sprite[] = []
-let Level = 1
 Colors2()
 scene.setBackgroundColor(11)
 tiles.setTilemap(tilemap`level_0`)
@@ -683,8 +735,8 @@ for (let V_sprite4 of V_list) {
 for (let H_sprite4 of H_list) {
     H_sprite4.setFlag(SpriteFlag.StayInScreen, true)
 }
-Level1()
-game.splash("Level " + convertToText(Level))
+Level = game.askForNumber("", 1)
+Go_to_level(true)
 game.onUpdate(function () {
     if (Driver.y == 16) {
         if (Level < 9) {
@@ -692,25 +744,6 @@ game.onUpdate(function () {
         } else {
             game.over(true)
         }
-        if (Level == 1) {
-            Level1()
-        } else if (Level == 2) {
-            Level2()
-        } else if (Level == 3) {
-            Level3()
-        } else if (Level == 4) {
-            Level4()
-        } else if (Level == 5) {
-            Level5()
-        } else if (Level == 6) {
-            Level6()
-        } else if (Level == 7) {
-            Level7()
-        } else if (Level == 8) {
-            Level8()
-        }
-        if (Level < 9) {
-            game.splash("Level " + convertToText(Level))
-        }
+        Go_to_level(false)
     }
 })
