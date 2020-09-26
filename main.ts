@@ -2,6 +2,9 @@ namespace SpriteKind {
     export const Virtical = SpriteKind.create()
     export const Horizontal = SpriteKind.create()
 }
+/**
+ * V2-5
+ */
 function Level8 () {
     Put_in_level(Driver, 72, 96)
     Put_in_level(CarV2, 40, 32)
@@ -18,6 +21,8 @@ function Level8 () {
     Make_Invisible(JeepH2)
     Make_Invisible(LimoV3)
     Make_Invisible(TrailerCarH3)
+    Make_Invisible(Car_2V2)
+    Make_Invisible(Car_3V2)
 }
 function Colors2 () {
     color.setColor(11, color.rgb(101, 101, 101))
@@ -27,7 +32,6 @@ function Colors2 () {
     color.setColor(12, color.rgb(50, 50, 50))
     color.setColor(5, color.rgb(220, 220, 7))
     color.setColor(4, color.rgb(79, 70, 37))
-    color.setColor(3, color.rgb(4, 30, 75))
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     moveV(-16)
@@ -48,6 +52,8 @@ function Level2 () {
     Make_Invisible(MinivanH2)
     Make_Invisible(Car_2H2)
     Make_Invisible(Minivan_2H2)
+    Make_Invisible(Car_2V2)
+    Make_Invisible(Car_3V2)
 }
 function Make_Invisible (Vehicle: Sprite) {
     Vehicle.setFlag(SpriteFlag.Ghost, true)
@@ -69,6 +75,8 @@ function Level3 () {
     Make_Invisible(MinivanH2)
     Make_Invisible(Car_2H2)
     Make_Invisible(Minivan_2H2)
+    Make_Invisible(Car_2V2)
+    Make_Invisible(Car_3V2)
 }
 controller.down.onEvent(ControllerButtonEvent.Released, function () {
     moveV(16)
@@ -90,6 +98,8 @@ function Go_to_level (extra: boolean) {
         Level7()
     } else if (Level == 8) {
         Level8()
+    } else if (Level == 9) {
+        Level9()
     } else {
         if (extra) {
             for (let value of V_list) {
@@ -184,6 +194,8 @@ function Level1 () {
     Make_Invisible(MinivanH2)
     Make_Invisible(Car_2H2)
     Make_Invisible(Minivan_2H2)
+    Make_Invisible(Car_2V2)
+    Make_Invisible(Car_3V2)
 }
 function Level5 () {
     Put_in_level(Driver, 72, 80)
@@ -200,6 +212,9 @@ function Level5 () {
     Make_Invisible(MinivanH2)
     Make_Invisible(Car_2H2)
     Make_Invisible(Minivan_2H2)
+    Make_Invisible(Car_2V2)
+    Make_Invisible(Car_3V2)
+    Make_Invisible(LimoV3)
 }
 function moveV (direction: number) {
     for (let V_sprite3 of V_list) {
@@ -260,10 +275,31 @@ function Level7 () {
     Make_Invisible(JeepH2)
     Make_Invisible(TrailerCarH3)
     Make_Invisible(MinivanH2)
+    Make_Invisible(Car_2V2)
+    Make_Invisible(Car_3V2)
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     MoveH(16)
 })
+function Level9 () {
+    Put_in_level(Driver, 72, 48)
+    Put_in_level(SchoolBusH3, 56, 104)
+    Put_in_level(TrailerCarH3, 72, 24)
+    Put_in_level(TruckV3, 88, 88)
+    Put_in_level(CarH2, 112, 72)
+    Put_in_level(TaxiH2, 96, 56)
+    Put_in_level(JeepH2, 64, 72)
+    Put_in_level(Minivan_2H2, 48, 40)
+    Put_in_level(MinivanH2, 64, 88)
+    Put_in_level(JeepV2, 104, 32)
+    Put_in_level(CarV2, 120, 48)
+    Put_in_level(Car_2V2, 120, 96)
+    Put_in_level(TaxiV2, 40, 80)
+    Make_Invisible(Car_2H2)
+    Make_Invisible(Car_3V2)
+    Make_Invisible(PartyBusH3)
+    Make_Invisible(LimoV3)
+}
 function Put_in_level (Vehicle: Sprite, x: number, y: number) {
     Vehicle.setFlag(SpriteFlag.Ghost, false)
     Vehicle.setFlag(SpriteFlag.Invisible, false)
@@ -286,6 +322,8 @@ function Level4 () {
     Make_Invisible(MinivanH2)
     Make_Invisible(Car_2H2)
     Make_Invisible(Minivan_2H2)
+    Make_Invisible(Car_2V2)
+    Make_Invisible(Car_3V2)
 }
 function Create_Charecters () {
     Driver = sprites.create(img`
@@ -686,6 +724,74 @@ function Create_Charecters () {
         cccffffffffcffffffffccccccccc...
         .ccccccccccccccccccccffccccc....
         `, SpriteKind.Horizontal)
+    Car_2V2 = sprites.create(img`
+        ........c.......
+        ....cccccccc....
+        ..cccccccccccc..
+        .cccccccccccccc.
+        cccccccccccccccc
+        cccccccccccccccc
+        cccccccccccccccc
+        cccccccccccccccc
+        cccccffffffccccc
+        cccffffffffffccc
+        fcffffffffffffcf
+        cccffffffffffccc
+        cfcffffffffffcfc
+        cfccffffffffccfc
+        cffccccccccccffc
+        cfffccccccccfffc
+        cfffccccccccfffc
+        cfffccccccccfffc
+        cfffccccccccfffc
+        cffffccccccffffc
+        cffffccccccffffc
+        cffffccccccffffc
+        cfffccccccccfffc
+        cfffccccccccfffc
+        cffccccccccccffc
+        cffcffffffffcffc
+        cfccffffffffccfc
+        cfcffffffffffcfc
+        cfcffffffffffcfc
+        cccffffffffffccc
+        .ccfffccccfffcc.
+        ..cccccccccccc..
+        `, SpriteKind.Virtical)
+    Car_3V2 = sprites.create(img`
+        ........b.......
+        ....dddddddd....
+        ..dddddddddddd..
+        .dddddddddddddd.
+        dddddddddddddddd
+        dddddddddddddddd
+        dddddddddddddddd
+        dddddddddddddddd
+        dddddffffffddddd
+        dddffffffffffddd
+        fdffffffffffffdf
+        dddffffffffffddd
+        dfdffffffffffdfd
+        dfddffffffffddfd
+        dffddddddddddffd
+        dffddddddddddffd
+        dfffddddddddfffd
+        dfffddddddddfffd
+        dfffddddddddfffd
+        ddffddddddddffdd
+        dfddddddddddddfd
+        dfffddddddddfffd
+        dfffddddddddfffd
+        dfffddddddddfffd
+        dffddddddddddffd
+        dffdffffffffdffd
+        dfddfffddfffddfd
+        dfdffffffffffdfd
+        dfdffffffffffdfd
+        dddffffffffffddd
+        .ddfffddddfffdd.
+        ..dddddddddddd..
+        `, SpriteKind.Virtical)
 }
 function Level6 () {
     Put_in_level(Driver, 72, 80)
@@ -703,8 +809,12 @@ function Level6 () {
     Make_Invisible(TruckV3)
     Make_Invisible(PartyBusH3)
     Make_Invisible(TrailerCarH3)
+    Make_Invisible(Car_2V2)
+    Make_Invisible(Car_3V2)
 }
 let overlap = false
+let Car_3V2: Sprite = null
+let Car_2V2: Sprite = null
 let TrailerCarH3: Sprite = null
 let LimoV3: Sprite = null
 let JeepH2: Sprite = null
